@@ -11,7 +11,7 @@ public final class ErsCrudMain
 	DBUtil.makeConnection();
 	UserService userService = new UserServiceImpl();
 	RequestService requestService = new RequestServiceImpl();
-	Javalin server = Javalin.create((config) -> config.enableCorsForAllOrigins()).start(9876);
+	Javalin server = Javalin.create((config) -> config.enableCorsForAllOrigins()).start(8888);
 	
 	//for Users
 	server.get("api/users/{uid}", (ctx) ->
@@ -35,8 +35,10 @@ public final class ErsCrudMain
 	
 	server.post("api/users", (ctx) ->
 	{
-	    ctx.json(userService.createUser(ctx.bodyAsClass(UserPojo.class)));
+	    UserPojo newUser = userService.createUser(ctx.bodyAsClass(UserPojo.class));
+	    ctx.json(newUser);
 	    System.out.println(ctx.path());
+	    System.out.println(newUser.toString());
 	});
 	
 	server.put("api/users/{uid}", (ctx) ->
@@ -45,9 +47,15 @@ public final class ErsCrudMain
 	    System.out.println(ctx.path());
 	});
 	
-	server.delete("api/users/{uid}", (ctx) ->
+	server.delete("api/users/r/{uid}", (ctx) ->
 	{
 	    userService.removeUser(Integer.parseInt(ctx.pathParam("uid")));
+	    ctx.json(ctx.bodyAsClass(UserPojo.class));
+	});
+	
+	server.get("api/users/verify/{uid}", (ctx) -> {
+	    ctx.json(userService.verifyPassword(userService.getUser(Integer.parseInt(ctx.pathParam("uid")))));
+	    System.out.println(ctx.path());
 	});
 	
 	

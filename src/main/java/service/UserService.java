@@ -12,4 +12,5 @@ public interface UserService
     UserPojo updateUser(UserPojo user);
     UserPojo removeUser(int userKey);
     List<UserPojo> getAllUsers();
+    boolean verifyPassword(UserPojo user);
 }

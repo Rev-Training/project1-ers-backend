@@ -18,13 +18,13 @@ public final class UserPojo
 	this.userIsRemoved = removed;
     }
     
-    public UserPojo(String username, String passwordHash, boolean isManager, boolean removed)
+    public UserPojo(String userName, String userPassword, boolean userIsManager, boolean userIsRemoved)
     {
 	super();
-	this.userName = username;
-	this.userPassword = passwordHash;
-	this.userIsManager = isManager;
-	this.userIsRemoved = removed;
+	this.userName = userName;
+	this.userPassword = userPassword;
+	this.userIsManager = userIsManager;
+	this.userIsRemoved = userIsRemoved;
     }
     
     public UserPojo()
@@ -33,24 +33,24 @@ public final class UserPojo
 	// TODO Auto-generated constructor stub
     }
 
-    public String getUsername()
+    public String getUserName()
     {
 	return userName;
     }
     
-    public void setUsername(String username)
+    public void setUserName(String username)
     {
 	this.userName = username;
     }
     
-    public String getPasswordHash()
+    public String getUserPassword()
     {
 	return userPassword;
     }
     
-    public void setPasswordHash(String passwordHash)
+    public void setUserPassword(String userPassword)
     {
-	this.userPassword = passwordHash;
+	this.userPassword = userPassword;
     }
         
     public int getUserID()
@@ -58,17 +58,17 @@ public final class UserPojo
 	return userID;
     }
     
-    public boolean isManager()
+    public boolean getUserIsManager()
     {
 	return userIsManager;
     }
     
-    public boolean isRemoved()
+    public boolean getUserIsRemoved()
     {
 	return userIsRemoved;
     }
     
-    public void setRemoved(boolean isRemoved)
+    public void setUserIsRemoved(boolean isRemoved)
     {
 	this.userIsRemoved = isRemoved;
     }

@@ -11,14 +11,14 @@ public final class UserServiceImpl implements UserService
     @Override
     public UserPojo createUser(UserPojo user)
     {
-	UserDaoJdbcImpl.instance().createUser(user);
-	return getUser(user.getUserID());
+	return getUser(UserDaoJdbcImpl.instance().createUser(user));
     }
 
     @Override
     public UserPojo getUser(int userKey)
     {	
-	return UserDaoJdbcImpl.instance().getUser(userKey);
+	UserPojo userCache = UserDaoJdbcImpl.instance().getUser(userKey);	
+	return userCache == null ? new UserPojo() : userCache;
     }
 
     @Override
@@ -54,4 +54,8 @@ public final class UserServiceImpl implements UserService
 	
     }
     
+    @Override
+    public final boolean verifyPassword(UserPojo user) {
+	return PasswordEncoder.verifyPassword(user.getUserPassword(), getUser(user.getUserID()).getUserPassword());
+    }
 }

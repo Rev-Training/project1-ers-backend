@@ -6,7 +6,7 @@ import pojo.RequestPojo;
 
 public interface RequestDao
 {
-    void createRequest(RequestPojo request);
+    int createRequest(RequestPojo request);
     RequestPojo getRequest(int requestKey);
     void updateRequest(int requestKey, boolean approve);
     void deleteRequest(int requestKey);

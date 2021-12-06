@@ -6,7 +6,7 @@ import pojo.UserPojo;
 
 public interface UserDao
 {
-    void createUser(UserPojo user);
+    int createUser(UserPojo user);
     UserPojo getUser(int userKey);
     UserPojo getUser(String username);
     void updateUser(UserPojo user);

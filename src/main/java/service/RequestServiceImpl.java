@@ -11,8 +11,7 @@ public final class RequestServiceImpl implements RequestService
     @Override
     public RequestPojo createRequest(RequestPojo request)
     {
-	RequestDaoJdbcImpl.instance().createRequest(request);
-	return getRequest(request.getRequestID());
+	return getRequest(RequestDaoJdbcImpl.instance().createRequest(request));
     }
 
     @Override

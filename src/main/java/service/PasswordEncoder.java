@@ -2,6 +2,8 @@ package service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import pojo.UserPojo;
+
 public class PasswordEncoder
 {
     static BCryptPasswordEncoder encoder;
@@ -22,5 +24,10 @@ public class PasswordEncoder
     
     public static final boolean verifyPassword(String inputPassword, String encodedPassword) {
 	return encoder.matches(inputPassword, encodedPassword);
+    }
+    
+    public static final UserPojo encryptUser(UserPojo user) {
+	user.setUserPassword(encodePassword(user.getUserPassword()));
+	return user;
     }
 }

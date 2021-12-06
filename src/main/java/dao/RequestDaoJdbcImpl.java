@@ -26,7 +26,7 @@ public final class RequestDaoJdbcImpl implements RequestDao
     }
     
     @Override
-    public void createRequest(RequestPojo request)
+    public int createRequest(RequestPojo request)
     {
 	Connection conn = DBUtil.makeConnection();
 	try
@@ -38,21 +38,24 @@ public final class RequestDaoJdbcImpl implements RequestDao
 			 + request.getUserRef()
 			 + ", "
 			 + request.getAmount()
-			 + ", "
+			 + ", '"
 			 + currentTime
-			 + ", "
+			 + "', "
 			 + (request.getStatus() == RequestStatus.PENDING)
 			 + ", "
 			 + (request.getStatus() == RequestStatus.ACCEPTED)
-			 + ", "
 			 + ") RETURNING request_id;");
+	    	    
+	    int newRequestID = stmt.getResultSet().next() ? stmt.getResultSet().getInt(1) : -1;
+	    System.out.println("Request #" + newRequestID + " has been created.");
+	    return newRequestID;
 	    
-	    System.out.println("Request #" + stmt.getResultSet().getInt(1) + " has been created.");
 	} catch (SQLException e)
 	{
 	    System.out.println(e.getMessage());
 	    e.printStackTrace();
 	}
+	return -1;
     }
     
     @Override
